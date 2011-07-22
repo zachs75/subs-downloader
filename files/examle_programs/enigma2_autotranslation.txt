@@ -1,0 +1,12 @@
+_() translates the stuff, remove it or do an ugly hack:
+
+use "no "
+
+and if necesary remove
+
+if str=="no ":
+str = str[:2]
+
+
+
+after geting the value

@@ -17,7 +17,7 @@ http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/plugin
 
 _Open Subtilte configuration menu_
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/config_opensubtitle.jpg
-[WikiSyntax http://code.google.com/p/subs-downloader/wiki/OpenSubtitle_configuration_and_use]
+[Execution_and_configuration  http://code.google.com/p/subs-downloader/wiki/OpenSubtitle_configuration_and_use]
 
 _Napi Projekt configuration menu_
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/config_napiprojekt.jpg

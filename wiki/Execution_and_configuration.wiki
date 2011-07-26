@@ -10,11 +10,9 @@ This manual will explain how to execute and configure Subs Downloader plugin.
   - Menu on Your remote,
   - then choose plugin submenu,
   - and finally choose plugin icon (as below)
-
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/plugin_icon.jpg
 
 *2)* Press menu button on remote controller and You will see:
-
 _Open Subtilte configuration menu_
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/config_opensubtitle.jpg
 for more details how to download subtitle from Open Subtitle see [OpenSubtitle_configuration_and_use]

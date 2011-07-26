@@ -12,7 +12,7 @@ This manula will perform You through Subtitle Downloader installation proces
 _I prefer /tmp directory so this manual will show You installation for this case._
 <br>
 2) Change directory to TPM:<br>
-_root@DM8000:cd /tmp_<br>
+'root@DM8000:cd /tmp'<br>
 3) Install IPK file:<br>
 _root@DM8000:opkg install enigma2-plugin-extensions-subsdownloader_ _VERSION_ _mipsel.ipk_<br>
 

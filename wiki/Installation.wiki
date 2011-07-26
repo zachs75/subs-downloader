@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Subs Downloader installation procedure.
 #labels installation
 
 = Introduction =

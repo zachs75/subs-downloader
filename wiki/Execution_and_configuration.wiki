@@ -17,8 +17,15 @@ http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/plugin
 
 _Open Subtilte configuration menu_
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/config_opensubtitle.jpg
-for more details how to download subtitle see [OpenSubtitle_configuration_and_use]
+for more details how to download subtitle from Open Subtitle see [OpenSubtitle_configuration_and_use]
 
+*2a)* Some servers have possibility to choose proffered by You languages. I.e. in Open Subtitle You can choose one, two, or any language.
+  - for one language You should choose first language as You wish, and second language should be "lack",
+  - for two languages You should specifies first and second language as You wish,
+  - for any language You should choose first language as "any" other options are not important.
+_Servers like Napi Projekt have only one language version._
+
+*3)* If You press key right or left You will change subtitle server.
 _Napi Projekt configuration menu_
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/config_napiprojekt.jpg
-for more details how to download subtitle see [NapiProjekt_configuration_and_use]
+for more details how to download subtitle from Napi Project see [NapiProjekt_configuration_and_use]

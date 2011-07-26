@@ -1,4 +1,4 @@
-#summary plugin execution and configuration procedure.
+#summary plugin execution and configuration procedure v0.12.
 
 = Introduction =
 

@@ -1,8 +1,8 @@
-#summary One-sentence summary of this page.
+#summary plugin execution and configuration procedure.
 
 = Introduction =
 
-This manual will explain You how to execute and configure Subs Downloader plugin.
+This manual will explain You how to execute and configure Subs Downloader plug in.
 
 
 = Details =

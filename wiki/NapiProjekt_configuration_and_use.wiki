@@ -1,13 +1,17 @@
-#summary One-sentence summary of this page.
+#summary Napi Projekt configuration and use manual.
 
 = Introduction =
 
-Add your content here.
+This manula will show how to download subtitles from Napi Projekt.
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+*1)* Choose movie file for which You want to download subtitles.
+[http://subs-downloader.googlecode.com/svn/files/pictures/wiki/use_napiprojekt/1napiprojekt_choose_file.jpg]
+
+*2)* Press "TEXT" button on Your remote controller and subtitle download will starts.
+[http://subs-downloader.googlecode.com/svn/files/pictures/wiki/use_napiprojekt/2napiprojekt_process.jpg]
+
+*3)* If subtitle is downloaded successfully You will see message as below:
+[http://subs-downloader.googlecode.com/svn/files/pictures/wiki/use_napiprojekt/3napiprojekt_finish.jpg]

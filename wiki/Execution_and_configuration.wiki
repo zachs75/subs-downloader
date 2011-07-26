@@ -2,7 +2,7 @@
 
 = Introduction =
 
-This manual will explain You how to execute and configure Subs Downloader plugin.
+This manual will explain how to execute and configure Subs Downloader plugin.
 
 
 = Details =

@@ -3,12 +3,10 @@
 
 = Introduction =
 
-Add your content here.
+This manula will perform You through Subtitle Downloader installation proces
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+1) Copy enigma2-plugin-extensions-subsdownloader_ _VERSION_ _mipsel.ipk file via ftp (or other mechanism) to Your sat receiver.
+_I prefer /tmp directory so this manual will show You installation for this case._

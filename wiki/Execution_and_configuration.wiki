@@ -6,8 +6,9 @@ This manual will explain how to execute and configure Subs Downloader plugin.
 
 
 = Details =
+1) To execute plugin press:
+  - Menu on Your remote,
+  - then choose plugin submenu,
+  - and finally choose plugin icon (as below)
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/plugin_icon.jpg

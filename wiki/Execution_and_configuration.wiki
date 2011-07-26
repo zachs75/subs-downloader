@@ -1,8 +1,8 @@
-#summary plugin execution and configuration procedure v0.12.
+#summary Plugin execution and configuration procedure v0.12.
 
 = Introduction =
 
-This manual will explain You how to execute and configure Subs Downloader plug in.
+This manual will explain You how to execute and configure Subs Downloader plugin.
 
 
 = Details =

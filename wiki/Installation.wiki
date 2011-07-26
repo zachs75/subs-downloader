@@ -17,8 +17,7 @@ _root@DM8000:cd /tmp_<br><br>
 _root@DM8000:opkg install enigma2-plugin-extensions-subsdownloader_ _VERSION_ _mipsel.ipk_<br><br>
 
 You should see telnet respond as below:<br>
-
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/installation/installation_telnet.JPG
 
-4) Restart Enigma2 to add SubsDownloader to plugin list:<br>
+4) Restart Enigma2 to add Subs Downloader to plugin list:<br>
 _root@DM8000:killall -9 enigma2_

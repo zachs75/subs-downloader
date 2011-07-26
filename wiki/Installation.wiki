@@ -8,5 +8,14 @@ This manula will perform You through Subtitle Downloader installation proces
 
 = Details =
 
-1) Copy enigma2-plugin-extensions-subsdownloader_ _VERSION_ _mipsel.ipk file via ftp (or other mechanism) to Your sat receiver.
+1) Copy enigma2-plugin-extensions-subsdownloader_ _VERSION_ _mipsel.ipk file via ftp (or other mechanism) to Your sat receiver.<br>
 _I prefer /tmp directory so this manual will show You installation for this case._
+<br>
+2) Change directory to TPM:<br>
+_root@DM8000:cd /tmp_<br>
+3) Install IPK file:<br>
+_root@DM8000:opkg install enigma2-plugin-extensions-subsdownloader_ _VERSION_ _mipsel.ipk_<br>
+
+You should see telnet respond as below:<br>
+
+http://subs-downloader.googlecode.com/svn/files/pictures/wiki/installation/installation_telnet.JPG

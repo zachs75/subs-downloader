@@ -15,9 +15,9 @@ http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/plugin
 
 *2)* Press menu button on remote controller and You will see:
 
-_Open Subtilte configuration menu_
+_Open Subtilte configuration menu_ for more details see [OpenSubtitle_configuration_and_use]
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/config_opensubtitle.jpg
-[OpenSubtitle_configuration_and_use]
+
 
 _Napi Projekt configuration menu_
 http://subs-downloader.googlecode.com/svn/files/pictures/wiki/exec_config/config_napiprojekt.jpg

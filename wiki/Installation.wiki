@@ -1,4 +1,4 @@
-#summary Subs Downloader installation procedure.
+#summary Subs Downloader installation procedure v0.12.
 #labels installation
 
 = Introduction =

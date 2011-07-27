@@ -8,6 +8,10 @@ This manula will perform You through Subtitle Downloader installation proces
 
 = Details =
 
+==*0)* THIS STEP SHOULD BE DONE BY USERS WHO USE CLEAR iCVS image) without GP3 extebtion==
+
+Download iCVS_libs.zip located in "downloads" menu and install all content manually.
+I supost that libs aren't added to iCVS ipk repository so Uou have to install it by Yourself. <br>
 *1)* Copy enigma2-plugin-extensions-subsdownloader_ _VERSION_ _mipsel.ipk file via ftp (or other mechanism) to Your sat receiver.
 
 _I prefer /tmp directory so this manual will show You installation for this case._

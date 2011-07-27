@@ -8,7 +8,7 @@ This manula will perform You through Subtitle Downloader installation proces
 
 = Details =
 
-==*0)* THIS STEP SHOULD BE DONE BY USERS WHO USE CLEAR iCVS image) without GP3 extebtion==
+==*0)* THIS STEP SHOULD BE DONE BY USERS WHO USE CLEAR iCVS image (i.e without GP3 extension)==
 
 Download iCVS_libs.zip located in "downloads" menu and install all content manually.
 I suppose that libs aren't added to iCVS ipk repository so Uou have to install it by Yourself.

@@ -1,2 +1,2 @@
-http://img202.imageshack.us/img202/3012/opensuble.jpg
-http://img580.imageshack.us/img580/2039/napiproject.jpg
+<img>http://img202.imageshack.us/img202/3012/opensuble.jpg</img><time>25</time>
+<img>http://img580.imageshack.us/img580/2039/napiproject.jpg</img><time>25</time>

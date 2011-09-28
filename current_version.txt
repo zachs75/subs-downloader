@@ -1,2 +1,82 @@
-Subtitle Downloader v. 0.12.8 2011-08-09
-http://subs-downloader.googlecode.com/files/enigma2-plugin-extensions-subsdownloader_0.13.3-20110920_mipsel.ipk
+Subtitle Downloader v. 0.13.4 2011-09-20
+
+Enigma2 plugin which downloads subtitle to Your movie.
+
+Homepage:  http://code.google.com/p/subs-downloader/
+Developer: SileliS (enigma2subsdownloader@gmail.com)
+
+Any errors and suggestion should be sent to enigma2subsdownloader@gmail.com.
+I'll try to account all Your mail in my plugin.
+
+Program uses different free routines that was found in GOOGLE and adjust to my requirements:
+- DreamExplorerII (part to play media)
+- Periscope: http://code.google.com/p/periscope/
+- Napi2str.py by Pawel Sternal
+- libmediainfo, libzen
+- pyNapi by Arkadiusz Miśkiewicz: http://cvs.pld-linux.org/cgi-bin/cvsweb.cgi/SOURCES.old/pynapi.py
+- chardet: http://chardet.feedparser.org/
+
+Big THANK YOU to EMANUEL from IHAD who gave me technical advices.
+
+KEYBOARDS:
+==========
+MENU - show config menu
+INFO - show about info
+> - change widget to SubsList
+< - change widget to FileList
+TEXT - download subtitle or avaliable on server subtitle list
+OK - on FileList play media/ on SubsList download subtitle
+
+ver 0.14.1:
+- mov, mp4 and any other supported by Enigma2 movies Frame Per Second indicator detection avaliable,
+- config menu display fix,
+
+
+ver 0.13.3:
+- corrected handling of media pattern filter = "no" error in return_media_kind function,
+- implemented utf-8-sig file code page convertion (subtitle convertion is little faster),
+- possibility to add/remove Subs Downloader execution from BlueButton menu,
+- any2srt converion less sensitive on MLP2, TMP, MDVD, SUB2 subtilte errors.
+
+ver 0.12.7:
+- small fixes of errors detected in 0.12.6 version.
+
+ver. 0.12.6:
+- enable/disable media pastern filter,
+- enable/disable last FileList path save,
+- left/right key = page up/down both in FileList and SubsList,
+- extended MMI (comunication errors and other are described as MessageBox 
+
+ver. 0.12.1:
+- Pythin-zlib library added to IPK depends,
+- some correction of IPK's controll file,
+- small code fixes.
+
+ver. 0.12a:
+- basic file mbrowser,
+- handle OpenSubtile server,
+- handle NapiProjekt server,
+- play movie, picture, audio, some system files.
+
+TODO:
+- commercial manager,
+- plugin update notification,
+- 0 key hide show skin,
+- SubtitleSource.org handling,
+- Subscene.com handling,
+- Subtitulos.es handling,
+- Addic7ed.com handling,
+- TheSubDB.com handling,
+- BierDopje?.com handling,
+- Napisy24.pl handling,
+- advanced filemanager (delete, remove, copy, past),
+- file decompresser (zip, rar, 7zip, bzip, etc),
+- subtList country pix flags,
+- Enigma2 skin font size and color for movie handling,
+- IMDb handling,
+- users suggestions and known bugs.
+
+KNOWN BUG:
+- add opkg upgate at the preinst script (???mabey???)
+- program is sensitive for corrupted subtitles where end-line char is omitted i.e {12}{45}text{59}{70}text1{75}{90}text2
+- plugin don't run on Open Pli image - requires extended ipk's repository i.e. commands.py (subprocess module)

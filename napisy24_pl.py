@@ -1,12 +1,5 @@
 import httplib
-#import xml.dom.minidom    
-#import xml.etree.cElementTree as ElementTree
-
-
-#import xml.dom.minidom
-
-
-#http://www.blog.pythonlibrary.org/2010/11/12/python-parsing-xml-with-minidom/
+import xml.dom.minidom
 
 #  Copyright (C) 2011 Dawid Ba�ski <enigma2subsdownloader@gmail.com>
 #
@@ -24,18 +17,59 @@ import httplib
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-class Napisy24_pl():
+class XML_to_Dict():
+    def __init__(self):
+	pass
+    
+    def xmltodict(self, xmlstring):
+	doc = xml.dom.minidom.parseString(xmlstring)
+	self.remove_whilespace_nodes(doc.documentElement)
+	return self.elementtodict(doc.documentElement)
+
+    def elementtodict(self, parent):
+	child = parent.firstChild
+	if (not child):
+		return None
+	elif (child.nodeType == xml.dom.minidom.Node.TEXT_NODE):
+		return child.nodeValue
+	
+	d={}
+	while child is not None:
+		if (child.nodeType == xml.dom.minidom.Node.ELEMENT_NODE):
+			try:
+				d[child.tagName]
+			except KeyError:
+				d[child.tagName]=[]
+			d[child.tagName].append(self.elementtodict(child))
+		child = child.nextSibling
+	return d
+
+    def remove_whilespace_nodes(self, node, unlink=True):
+	remove_list = []
+	for child in node.childNodes:
+		if child.nodeType == xml.dom.Node.TEXT_NODE and not child.data.strip():
+			remove_list.append(child)
+		elif child.hasChildNodes():
+			self.remove_whilespace_nodes(child, unlink)
+	for node in remove_list:
+		node.parentNode.removeChild(node)
+		if unlink:
+			node.unlink()
+
+class Napisy24_pl(XML_to_Dict):    
     def __init__(self,moviePath):
+	#XML_to_Dict.__init__(self)
         self.MovieName = ((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0]
         self.MovieDir = (moviePath.rsplit("/",1))[0]
         self.ZipFilePath = str(moviePath.rsplit).rsplit(".", 1)[0]+'.zip'
         
     def getNapisy24_SubtitleListXML(self):
+	NAPISY24_url = "napisy24.pl"
         repeat = 3
         while repeat > 0:  
             repeat = repeat - 1
             try:
-                conn = httplib.HTTPConnection("napisy24.pl")
+                conn = httplib.HTTPConnection(NAPISY24_url)
                 conn.request("GET", "/libs/webapi.php?title=%s" % self.MovieName)
                 r1 = conn.getresponse()
                 print r1.status, r1.reason
@@ -75,14 +109,15 @@ class Napisy24_pl():
             if x =="\n":
                 break
         self.XML_String = self.XML_String[0:SECONDLINE_CHAR] + "<lista>"+ self.XML_String[(SECONDLINE_CHAR+1):]+"</lista>"
-        
- """   def XML_to_diary(self):
-        try:
-            dom = xml.dom.minidom.parseString(self.XML_String)
-            self.aa = dom.getElementsByTagName("subtitle")
-        except:
-            pass"""
-                    
+    
+    def return_xml_dict(self):
+	return self.xmltodict(self.XML_String)['subtitle']
+    
+    def download_subtitle_zip(self):
+	pass
+    
+
+             
 
 
 
@@ -90,10 +125,10 @@ aa = Napisy24_pl("127.avi")
 if aa.getNapisy24_SubtitleListXML()== True:
     aa.Correct_MultiRoot_XML()
     print "Sa napisy"
-    aa.XML_to_diary()  
+    print aa.return_xml_dict()    
 else:
     print "Nie ma napisow"
-    
 
+#mm = aa.xml_to_dict_convertion()
 
 

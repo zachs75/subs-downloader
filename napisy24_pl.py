@@ -1,6 +1,7 @@
 import httplib
 import xml.dom.minidom
 import re
+import os
 
 #  Copyright (C) 2011 Dawid Ba�ski <enigma2subsdownloader@gmail.com>
 #
@@ -64,6 +65,38 @@ class Napisy24_pl(XML_to_Dict):
         self.ZipFilePath = str(moviePath.rsplit).rsplit(".", 1)[0]+'.zip'
 	self.subtitle_dict = []
 	self.NAPISY24_url = "napisy24.pl"
+    
+    def __IMDB_idenifier_search(self):
+	dir_list = os.listdir(self.MovieDir)
+	dir_count = 0
+	for x in dir_list:
+	    if x.split(".")[-1].lower()=="nfo":
+		print "find NFO in %i list" % dir_count
+		break
+	    dir_count=dir_count+1
+	try:	    
+	    nfo_file = open(self.MovieDir+"/"+dir_list[dir_count],"r")
+	    buffor = nfo_file.read()
+	    nfo_file.close
+	    #IMDB line in nfo: iMDB: http://www.imdb.com/title/tt1219289/
+	    char_count = 0
+	    while (char_count+len("http://www.imdb.com/title/")) < len(self.buffor):
+		if buffor[char_count:(char_count+len("http://www.imdb.com/title/"))] == "http://www.imdb.com/title/":
+		    print "%s" % str(char_count+len("http://www.imdb.com/title/"))
+		    IMDB_begining = char_count+len("http://www.imdb.com/title/")
+		    break
+		char_count=char_count+1
+	    char_count=IMDB_begining+1   
+	    while char_count < len(self.buffor):
+		if buffor[char_count:(char_count+1)] == "/":
+		    print "%s" % str(char_count)
+		    IMDB_ending = char_count
+		    break
+		char_count=char_count+1
+	    return buffor[IMDB_begining:IMDB_ending] ( #tutaj trzeba sprawdzić paretn IMDB numeru jeśli jest oka to zwraca informację jeśli jest nie oka to zwraca błąd
+	except:
+	    print "blad"
+	    ( #tu trzeba zwrócić informację jeśli jest jakiś błąd
     
     def __connect_with_server(self,get_operatoin,server_reuest_type):
 	"""Function connect with server and downloades avaliable subtitle
@@ -172,8 +205,10 @@ class Napisy24_pl(XML_to_Dict):
 
 aa = Napisy24_pl("127.avi")
 
+
 aa = Napisy24_pl("American Horror Story") #przypadek z dwona płytami http://napisy24.pl/download/53028/
 
+aa = Napisy24_pl("C:/!!!!!!!!!!/Limitless.avi")
 if aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_film_name")== True:
 #if aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_IMDB")== True:
     aa.Correct_MultiRoot_XML()

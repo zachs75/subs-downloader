@@ -1,9 +1,13 @@
 import httplib
 import xml.dom.minidom
+import time
 import re
 import os
+from urllib import quote
+from operator import itemgetter, attrgetter
+import zipfile
 
-#  Copyright (C) 2011 Dawid Ba�ski <enigma2subsdownloader@gmail.com>
+#  Copyright (C) 2011 Dawid Baďż˝ski <enigma2subsdownloader@gmail.com>
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -62,7 +66,7 @@ class Napisy24_pl(XML_to_Dict):
     def __init__(self,moviePath):	
         self.MovieName = ((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0]
         self.MovieDir = (moviePath.rsplit("/",1))[0]
-        self.ZipFilePath = str(moviePath.rsplit).rsplit(".", 1)[0]+'.zip'
+        self.ZipFilePath = self.MovieDir+'/'+((moviePath.rsplit("/",1))[-1]).rsplit(".",1)[0]+'.zip'
 	self.subtitle_dict = []
 	self.NAPISY24_url = "napisy24.pl"
     
@@ -74,29 +78,31 @@ class Napisy24_pl(XML_to_Dict):
 		print "find NFO in %i list" % dir_count
 		break
 	    dir_count=dir_count+1
-	try:	    
+	try:	
 	    nfo_file = open(self.MovieDir+"/"+dir_list[dir_count],"r")
 	    buffor = nfo_file.read()
 	    nfo_file.close
-	    #IMDB line in nfo: iMDB: http://www.imdb.com/title/tt1219289/
+	    #IMDB line in nfo: iMDB: http://www.imdb.com/title/tt1219289/	    
 	    char_count = 0
-	    while (char_count+len("http://www.imdb.com/title/")) < len(self.buffor):
+	    while (char_count+len("http://www.imdb.com/title/")) < len(buffor):
 		if buffor[char_count:(char_count+len("http://www.imdb.com/title/"))] == "http://www.imdb.com/title/":
 		    print "%s" % str(char_count+len("http://www.imdb.com/title/"))
-		    IMDB_begining = char_count+len("http://www.imdb.com/title/")
+		    self.dd11 = IMDB_begining = char_count+len("http://www.imdb.com/title/")
 		    break
 		char_count=char_count+1
 	    char_count=IMDB_begining+1   
-	    while char_count < len(self.buffor):
+	    while char_count < len(buffor):
 		if buffor[char_count:(char_count+1)] == "/":
 		    print "%s" % str(char_count)
-		    IMDB_ending = char_count
+		    self.dd22 = IMDB_ending = char_count
 		    break
 		char_count=char_count+1
-	    return buffor[IMDB_begining:IMDB_ending] ( #tutaj trzeba sprawdzić paretn IMDB numeru jeśli jest oka to zwraca informację jeśli jest nie oka to zwraca błąd
-	except:
-	    print "blad"
-	    ( #tu trzeba zwrócić informację jeśli jest jakiś błąd
+	    return buffor[IMDB_begining:IMDB_ending]
+	#tutaj trzeba sprawdziÄ paretn IMDB numeru jeĹli jest oka to zwraca informacjÄ jeĹli jest nie oka to zwraca bĹÄd
+	except:	    
+	    print "blad IMBN"
+	    return False
+	    #( #tu trzeba zwrĂłciÄ informacjÄ jeĹli jest jakiĹ bĹÄd
     
     def __connect_with_server(self,get_operatoin,server_reuest_type):
 	"""Function connect with server and downloades avaliable subtitle
@@ -121,18 +127,20 @@ class Napisy24_pl(XML_to_Dict):
         
     def getNapisy24_SubtitleListXML(self, subtitle_list_reuest_type):	
         repeat = 3
+	if subtitle_list_reuest_type == "downloada_subtitle_list_by_film_name":
+	    request_subtitle_list = "/libs/webapi.php?title=%s" % quote(self.MovieName)		
+	elif subtitle_list_reuest_type == "downloada_subtitle_list_by_IMDB":
+	    request_subtitle_list = "/libs/webapi.php?imdb=%s" % "tt1219289"
         while repeat > 0:  
             repeat = repeat - 1
-	    if subtitle_list_reuest_type == "downloada_subtitle_list_by_film_name":
-		request_subtitle_list = "/libs/webapi.php?title=%s" % self.MovieName		
-	    elif subtitle_list_reuest_type == "downloada_subtitle_list_by_IMDB":
-		request_subtitle_list = "/libs/webapi.php?imdb=%s" % "tt1219289"
-		pass
 	    r1_status = self.__connect_with_server(request_subtitle_list, "downloada_subtitle_list_by_film_name")            
-            if r1_status != 200:
+            if r1_status != 200 and r1_status != 400:
                 print  "Fetching subtitle list failed, HTTP code: %s" % (str(r1_status))
                 time.sleep(0.5)
                 continue
+	    elif r1_status == 400:
+		print "Fetching subtitle list failed, HTTP code: %s \n Bad request in string: %s." % (str(r1_status), request_subtitle_list)
+		repeat = -1
             else:
                 repeat = 0
     
@@ -145,10 +153,13 @@ class Napisy24_pl(XML_to_Dict):
                 print "Subtitle list download FAILED"
                 continue
                 
-        if self.XML_String != 'brak wynikow':
-            return True
-        else:
+        if r1_status != 200 or self.XML_String == 'brak wynikow' or self.XML_String == "" or self.XML_String is None:
             return False
+        else:
+	    if self.return_xml_dict() == True:
+		return True
+	    else:
+		return False
               
     def Correct_MultiRoot_XML(self):
         if self.XML_String[0] == "\n":
@@ -163,14 +174,35 @@ class Napisy24_pl(XML_to_Dict):
 	self.XML_String = self.XML_String.decode("CP1252").encode("UTF-8")
     
     def return_xml_dict(self):
-	self.subtitle_dict = self.xmltodict(self.XML_String)['subtitle']
+	try:
+	    self.Correct_MultiRoot_XML()
+	    self.subtitle_dict = sorted(self.xmltodict(self.XML_String)['subtitle'],key=itemgetter('imdb','cd'))
+	    #self.subtitle_dict = self.xmltodict(self.XML_String)['subtitle']
+	    print "XML subtitle list downloaded and converted to dict"
+	    return True
+	except:
+	    print "XML subtitle list  not downloaded or converterd."
+	    return False
+	    
     
     def return_xml_dict_entry_value(self,dict_entry, dict_entry_position):
 	value = self.subtitle_dict[dict_entry][dict_entry_position]
 	return value[0]
 
-    def download_subtitle_zip(self, dict_entry):
-	request_subtitle_list = "http://napisy24.pl/download/%i/" % int(self.return_xml_dict_entry_value(dict_entry,'id'))
+    def save_downloaded_zip(self, dict_entry_to_download):
+	if self.download_subtitle_zip(dict_entry_to_download) == True:
+	    try:
+		zip_file1 = open(self.ZipFilePath,"wb")
+		zip_file1.write(self.zip_string)
+		zip_file1.close
+		print "Zipfile: %s saved on hdd." % self.ZipFilePath
+		return True
+	    except:
+		print "Problems with Zipfile: %s saveing on hdd." % self.ZipFilePath
+		return False
+	
+    def download_subtitle_zip(self, dict_entry_to_download):
+	request_subtitle_list = "http://napisy24.pl/download/%i/" % int(self.return_xml_dict_entry_value(dict_entry_to_download,'id'))
 	repeat = 3
 	while repeat > 0:  
             repeat = repeat - 1
@@ -193,38 +225,37 @@ class Napisy24_pl(XML_to_Dict):
                 continue
                 
         if self.zip_string[0:2] == 'PK':
+	    print "Success to download subtitle zip."
             return True
         else:
+	    print "Reild to download subtitle zip."
             return False
 
-	
-    
-          
 
 
+aa = Napisy24_pl("C:/!!!!!!!!!!/Lord of the ring.avi")
+aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_film_name")
+aa.save_downloaded_zip(1)
 
-aa = Napisy24_pl("127.avi")
-
-
-aa = Napisy24_pl("American Horror Story") #przypadek z dwona płytami http://napisy24.pl/download/53028/
-
+aa = Napisy24_pl("127")
+aa = Napisy24_pl("C:/!!!!!!!!!!/American Horror Story.avi") #przypadek z dwona pĹytami http://napisy24.pl/download/53028/
 aa = Napisy24_pl("C:/!!!!!!!!!!/Limitless.avi")
-if aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_film_name")== True:
-#if aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_IMDB")== True:
-    aa.Correct_MultiRoot_XML()
-    print "Jest lista napisów"
-    print aa.return_xml_dict()    
-    if aa.download_subtitle_zip(1) == True:
-	print "Zip z napisami ściągnięto"
-    else:
-	print "Problemy ze sciągnieciem ZIPu z napisami"
-	#numer wpisu z dictionary	
-else:
-    print "Nie ma llisty napisow"
 
+
+if aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_film_name")== True:
+
+if aa.__IMDB_idenifier_search()!= False:
+    if aa.getNapisy24_SubtitleListXML("downloada_subtitle_list_by_IMDB")== True:
+	
+  
+if aa.download_subtitle_zip(1) == True:
+aa.save_downloaded_zip(1)
+	
+
+ZipFile.printdir()
 
    
 #write to file:
 file_xml = open("C:/!!!!!!!!!!/1.xml","w")
-file_xml.write(aa.XML_String)
+file_xml.write(aa.subtitle_dict[])
 file_xml.close

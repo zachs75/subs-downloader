@@ -1,3 +1,3 @@
-Subtitle Downloader v. 0.21.5 2011-12-09
-http://subs-downloader.googlecode.com/files/enigma2-plugin-extensions-subsdownloader_0.21.5-20111209_mipsel.ipk
+Subtitle Downloader v. 0.23.0: 2011-12-22
+http://subs-downloader.googlecode.com/files/enigma2-plugin-extensions-subsdownloader_0.23.0-20111222_mipsel.ipk
 
